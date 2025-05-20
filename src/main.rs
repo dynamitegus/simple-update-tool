@@ -9,13 +9,28 @@ fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
     false // Move this outside the loop to check all arguments
 }
 
+fn help() {
+    println!("HELP");
+}
+
+fn invald_tack() {
+    println!("Please enter a valid tack command or use --help for help.")
+}
+
 fn one_tack(args: Vec<&str>) {
-    println!("one tack");
+    if check_my_split_args(args, "h") {
+        help();
+    } else {
+        invald_tack();
+    }
+    
 }
 
 fn two_tack(args: Vec<String>) {
     if args.contains(&String::from("--help")) {
-        println!("HELP")
+        help();
+    } else {
+        invald_tack();
     }
 }
 
