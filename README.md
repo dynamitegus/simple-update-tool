@@ -5,14 +5,17 @@ anyway, this program is two things, a challange and project for me to write in r
 
 TODO (now):
 - [ ] Fedora 42 support
+/
 TODO (soon)
 - [ ] Debian(ubuntu and proxmox) support
 - [ ] gentoo support
 - [ ] arch support
+/
 TODO (id like)
 - [ ] slackware support
 - [ ] programming language support for specific projects maybe ```up -p``` or smth
 - [ ] OS upgrade eg: fedora 41 to 42
+/
 TODO (pipe dreams)
 - [ ] windows support
 - [ ] macos support
