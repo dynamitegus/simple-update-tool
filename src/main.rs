@@ -9,6 +9,16 @@ fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
     false // Move this outside the loop to check all arguments
 }
 
+fn one_tack(args: Vec<&str>) {
+    println!("one tack");
+}
+
+fn two_tack(args: Vec<String>) {
+    if args.contains(&String::from("--help")) {
+        println!("HELP")
+    }
+}
+
 fn main() {
     let passed_args: Vec<String> = env::args().collect();
     let split_args = &passed_args[1].split("");
@@ -16,14 +26,11 @@ fn main() {
     println!("{}", &passed_args[1]);
 
     if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] == "-") {
-        println!("two tack");
+        two_tack(passed_args.clone());
     } else if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] != "-") {
-        println!("one tack");
+        one_tack(my_args_have_been_splited);
     } else {
         println!("UH OH NO TACK");
     }
 
-    if check_my_split_args(my_args_have_been_splited, "h") {
-        println!("HELP");
-    };
 }
