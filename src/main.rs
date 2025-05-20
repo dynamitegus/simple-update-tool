@@ -1,5 +1,8 @@
 use std::env;
-
+use std::process::exit;
+use os_info;
+use os_info::Type::Fedora;
+use os_info::Type::Ubuntu;
 fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
     for arg in args {
         if arged_arg == arg {
@@ -48,6 +51,14 @@ fn two_tack(args: Vec<String>) {
 }
 
 fn main() {
+    let info = os_info::get();
+
+    if info.os_type() != Fedora {
+        println!("Operating System not supported yet! Go make a pull request and add support! Here is the repository link: https://github.com/dynamitegus/simple-update-tool/");
+        
+        exit(1);
+    }
+
     let passed_args: Vec<String> = env::args().collect();
     let split_args = &passed_args[1].split("");
     let my_args_have_been_splited = split_args.clone().collect::<Vec<&str>>();
