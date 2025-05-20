@@ -1,4 +1,4 @@
-> [!IMPORTANT]
+> [!CAUTION]
 > This tool does not actually do any updating! it is a WIP
 # Simple Update tool
 This is the successor to my [update script](https://github.com/dynamitegus/systemupdate) this script was eventually updated further but its apparently not in the repo... huh.
