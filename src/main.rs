@@ -3,6 +3,7 @@ use std::process::exit;
 use os_info;
 use os_info::Type::Fedora;
 use os_info::Type::Ubuntu;
+/// ```
 fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
     for arg in args {
         if arged_arg == arg {
@@ -12,19 +13,24 @@ fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
     false // Move this outside the loop to check all arguments
 }
 
+/// ```
 fn help() {
     println!("HELP");
 }
+/// ```
 fn update_repos() {
     println!("update repos")
 }
+/// ```
 fn upgrade() {
     println!("upgrade")
 }
+/// ```
 fn invald_tack() {
     println!("Please enter a valid tack command or use --help for help.")
 }
 
+/// ```
 fn one_tack(args: Vec<&str>) {
     if check_my_split_args(args.clone(), "h") {
         help();
@@ -38,6 +44,7 @@ fn one_tack(args: Vec<&str>) {
     
 }
 
+/// ```
 fn two_tack(args: Vec<String>) {
     if args.contains(&String::from("--help")) {
         help();
@@ -50,6 +57,18 @@ fn two_tack(args: Vec<String>) {
     }
 }
 
+/// Entry point for the command-line tool, handling OS compatibility and argument parsing.
+///
+/// Checks if the operating system is Fedora and exits with an error message if not. Parses command-line arguments to determine if single-dash short flags or double-dash long flags are used, then dispatches to the appropriate handler function. Prints an error message if the argument format is unrecognized.
+///
+/// # Examples
+///
+/// ```
+/// // Run the compiled binary with arguments, e.g.:
+/// // $ ./simple-update-tool --help
+/// // $ ./simple-update-tool -h
+/// main();
+/// ```
 fn main() {
     let info = os_info::get();
 
