@@ -12,16 +12,25 @@ fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
 fn help() {
     println!("HELP");
 }
-
+fn update_repos() {
+    println!("update repos")
+}
+fn upgrade() {
+    println!("upgrade")
+}
 fn invald_tack() {
     println!("Please enter a valid tack command or use --help for help.")
 }
 
 fn one_tack(args: Vec<&str>) {
-    if check_my_split_args(args, "h") {
+    if check_my_split_args(args.clone(), "h") {
         help();
-    } else {
-        invald_tack();
+    } 
+    if check_my_split_args(args.clone(), "r") {
+        update_repos();
+    }
+    if check_my_split_args(args.clone(), "u") {
+        upgrade();
     }
     
 }
@@ -29,6 +38,10 @@ fn one_tack(args: Vec<&str>) {
 fn two_tack(args: Vec<String>) {
     if args.contains(&String::from("--help")) {
         help();
+    } else if args.contains(&String::from("--update")) {
+        update_repos();
+    } else if args.contains(&String::from("--upgrade")) {
+        upgrade();
     } else {
         invald_tack();
     }
