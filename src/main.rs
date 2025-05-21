@@ -71,9 +71,39 @@ fn two_tack(args: Vec<String>) {
 fn main() {
     let info = os_info::get();
 
+    let passed_args: Vec<String> = env::args().collect();
+
+    if passed_args.len() < 2 {  
+        println!("No arguments provided. Use --help for usage information.");  
+        exit(1);  
+    }  
+
+    let split_args = &passed_args[1].split("");
+
+    let my_args_have_been_splited = split_args.clone().collect::<Vec<&str>>();
+    
+    println!("{}", &passed_args[1]);
+
     match info.os_type() {
         Fedora => {
             // Continue with Fedora-specific logic
+            if passed_args[1].starts_with("--") {
+                two_tack(passed_args.clone());
+
+            } else if passed_args[1].starts_with("-") {
+                // Extract the characters after the dash
+
+                let flags = passed_args[1]
+                    .chars()
+                    .skip(1)
+                    .map(|c| c.to_string())
+                    .collect::<Vec<String>>();
+
+                one_tack(flags.iter().map(|s| s.as_str()).collect());
+
+            } else {
+                println!("Command must start with - or --. Use --help for usage information.");
+            }
         },
         _ => {
             println!("Operating System not supported yet! Go make a pull request and add support! Here is the repository link: https://github.com/dynamitegus/simple-update-tool/");
@@ -81,17 +111,7 @@ fn main() {
             exit(1);
         }
     }
-
-
-    let passed_args: Vec<String> = env::args().collect();
-        if passed_args.len() < 2 {  
-        println!("No arguments provided. Use --help for usage information.");  
-        exit(1);  
-    }  
-    let split_args = &passed_args[1].split("");
-    let my_args_have_been_splited = split_args.clone().collect::<Vec<&str>>();
-    println!("{}", &passed_args[1]);
-
+ 
     if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] == "-") {
         two_tack(passed_args.clone());
     } else if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] != "-") {
