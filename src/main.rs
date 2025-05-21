@@ -1,8 +1,11 @@
-use std::env;
-use std::process::exit;
 use os_info;
 use os_info::Type::Fedora;
 use os_info::Type::Ubuntu;
+use std::env;
+use std::process::exit;
+
+use std::process::Command;
+
 /// Check the referenced vector for the passed arged_arg which is meant to be a single character string.
 /// # Example
 /// ```
@@ -23,6 +26,15 @@ fn check_my_split_args(args: &[&str], arged_arg: &str) -> bool {
 /// ```
 fn help() {
     println!("HELP");
+    let output = Command::new("/bin/cat")
+        .arg("file.txt")
+        .output()
+        .expect("failed to execute process");
+    println!("status: {}", output.status);
+    println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
+    println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
+
+    assert!(output.status.success());
 }
 /// ```
 fn update_repos() {
@@ -36,7 +48,7 @@ fn upgrade() {
 fn invald_tack() {
     println!("Please enter a valid tack command or use --help for help.")
 }
-/// Check the passed vector 
+/// Check the passed vector
 fn one_tack(args: Vec<&str>) {
     if check_my_split_args(&args, "h") {
         help();
@@ -47,7 +59,6 @@ fn one_tack(args: Vec<&str>) {
     if check_my_split_args(&args, "u") {
         upgrade();
     }
-    
 }
 
 /// ```
@@ -79,15 +90,15 @@ fn main() {
 
     let passed_args: Vec<String> = env::args().collect();
 
-    if passed_args.len() < 2 {  
-        println!("No arguments provided. Use --help for usage information.");  
-        exit(1);  
-    }  
+    if passed_args.len() < 2 {
+        println!("No arguments provided. Use --help for usage information.");
+        exit(1);
+    }
 
     let split_args = &passed_args[1].split("");
 
     let my_args_have_been_splited = split_args.clone().collect::<Vec<&str>>();
-    
+
     println!("{}", &passed_args[1]);
 
     match info.os_type() {
@@ -95,7 +106,6 @@ fn main() {
             // Continue with Fedora-specific logic
             if passed_args[1].starts_with("--") {
                 two_tack(passed_args.clone());
-
             } else if passed_args[1].starts_with("-") {
                 // Extract the characters after the dash
 
@@ -106,17 +116,14 @@ fn main() {
                     .collect::<Vec<String>>();
 
                 one_tack(flags.iter().map(|s| s.as_str()).collect());
-
             } else {
                 println!("Command must start with - or --. Use --help for usage information.");
             }
-        },
+        }
         _ => {
             println!("Operating System not supported yet! Go make a pull request and add support! Here is the repository link: https://github.com/dynamitegus/simple-update-tool/");
 
             exit(1);
         }
     }
- 
-
 }
