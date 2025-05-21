@@ -53,13 +53,23 @@ fn two_tack(args: Vec<String>) {
 fn main() {
     let info = os_info::get();
 
-    if info.os_type() != Fedora {
-        println!("Operating System not supported yet! Go make a pull request and add support! Here is the repository link: https://github.com/dynamitegus/simple-update-tool/");
-        
-        exit(1);
+    match info.os_type() {
+        Fedora => {
+            // Continue with Fedora-specific logic
+        },
+        _ => {
+            println!("Operating System not supported yet! Go make a pull request and add support! Here is the repository link: https://github.com/dynamitegus/simple-update-tool/");
+
+            exit(1);
+        }
     }
 
+
     let passed_args: Vec<String> = env::args().collect();
+        if passed_args.len() < 2 {  
+        println!("No arguments provided. Use --help for usage information.");  
+        exit(1);  
+    }  
     let split_args = &passed_args[1].split("");
     let my_args_have_been_splited = split_args.clone().collect::<Vec<&str>>();
     println!("{}", &passed_args[1]);
