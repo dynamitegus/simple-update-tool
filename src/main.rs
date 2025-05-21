@@ -3,7 +3,14 @@ use std::process::exit;
 use os_info;
 use os_info::Type::Fedora;
 use os_info::Type::Ubuntu;
+/// Check the referenced vector for the passed arged_arg which is meant to be a single character string.
+/// # Example
 /// ```
+/// if check_my_split_args(&args, "h") {
+///     function();
+/// }
+/// ```
+/// args being a goofy vector
 fn check_my_split_args(args: &[&str], arged_arg: &str) -> bool {
     for arg in args {
         if arged_arg == *arg {
@@ -29,7 +36,7 @@ fn upgrade() {
 fn invald_tack() {
     println!("Please enter a valid tack command or use --help for help.")
 }
-///```
+/// Check the passed vector 
 fn one_tack(args: Vec<&str>) {
     if check_my_split_args(&args, "h") {
         help();
@@ -66,7 +73,6 @@ fn two_tack(args: Vec<String>) {
 /// // Run the compiled binary with arguments, e.g.:
 /// // $ ./simple-update-tool --help
 /// // $ ./simple-update-tool -h
-/// main();
 /// ```
 fn main() {
     let info = os_info::get();
