@@ -3,9 +3,9 @@ use std::process::exit;
 use os_info;
 use os_info::Type::Fedora;
 use os_info::Type::Ubuntu;
-fn check_my_split_args(args: Vec<&str>, arged_arg: &str) -> bool {
+fn check_my_split_args(args: &[&str], arged_arg: &str) -> bool {
     for arg in args {
-        if arged_arg == arg {
+        if arged_arg == *arg {
             return true;
         }
     }
@@ -26,13 +26,13 @@ fn invald_tack() {
 }
 
 fn one_tack(args: Vec<&str>) {
-    if check_my_split_args(args.clone(), "h") {
+    if check_my_split_args(&args.clone(), "h") {
         help();
     } 
-    if check_my_split_args(args.clone(), "r") {
+    if check_my_split_args(&args.clone(), "r") {
         update_repos();
     }
-    if check_my_split_args(args.clone(), "u") {
+    if check_my_split_args(&args.clone(), "u") {
         upgrade();
     }
     
