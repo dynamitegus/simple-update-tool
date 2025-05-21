@@ -118,12 +118,5 @@ fn main() {
         }
     }
  
-    if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] == "-") {
-        two_tack(passed_args.clone());
-    } else if (my_args_have_been_splited[1] == "-") && (my_args_have_been_splited[2] != "-") {
-        one_tack(my_args_have_been_splited);
-    } else {
-        println!("UH OH NO TACK");
-    }
 
 }
