@@ -29,16 +29,15 @@ fn upgrade() {
 fn invald_tack() {
     println!("Please enter a valid tack command or use --help for help.")
 }
-
-/// ```
+///```
 fn one_tack(args: Vec<&str>) {
-    if check_my_split_args(&args.clone(), "h") {
+    if check_my_split_args(&args, "h") {
         help();
-    } 
-    if check_my_split_args(&args.clone(), "r") {
+    }
+    if check_my_split_args(&args, "r") {
         update_repos();
     }
-    if check_my_split_args(&args.clone(), "u") {
+    if check_my_split_args(&args, "u") {
         upgrade();
     }
     
